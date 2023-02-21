@@ -4,21 +4,25 @@ import socketserver
 
 from http import HTTPStatus
 
-src='''
-function version_of_my_lib() {
-  return "Wersja taka owaka...";
-}
-
-function test_alg() {
-  return Math.sqrt(16);
-}
-
-'''
+def get_file(path):
+  
+  data =  "// javascript content at path: "+path
+  data += "/////////////////////////////////////////////////"
+  
+  try:
+    with open(path, "r") as f_in:      
+      data += f_in.read()
+      
+  except IOError as e:
+    data ="// no javascript content at: "+path
+    
+  return data;
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(HTTPStatus.OK)
-        self.end_headers()        
+        self.end_headers()       
+        src = get_file(self.path)
         self.wfile.write(src.encode())
 
 
