@@ -6,15 +6,15 @@ from http import HTTPStatus
 
 def get_file(path):
   
-  data =  "// javascript content at path: "+path
-  data += "/////////////////////////////////////////////////"
+  data =  "// javascript content at path: "+path+"\n"
+  data += "/////////////////////////////////////////////////\n\n"
   
   try:
     with open(path, "r") as f_in:      
       data += f_in.read()
       
   except IOError as e:
-    data ="// no javascript content at: "+path
+    data ="// no javascript content at: "+path+"\n"
     
   return data;
 
