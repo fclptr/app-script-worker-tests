@@ -22,7 +22,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(HTTPStatus.OK)
         self.end_headers()       
-        src = get_file(self.path.strip("\"))
+        src = get_file(self.path.strip("\\"))
         self.wfile.write(src.encode())
 
 
