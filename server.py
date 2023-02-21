@@ -19,7 +19,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(HTTPStatus.OK)
         self.end_headers()        
-        self.wfile.write(src)
+        self.wfile.write(src.encode())
 
 
 port = int(os.getenv('PORT', 80))
